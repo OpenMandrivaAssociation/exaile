@@ -1,7 +1,7 @@
 %define	name	exaile
-%define	version 0.2.8
-%define realver	%version
-%define rel	2
+%define	version 0.2.9
+%define realver %version
+%define rel	1
 %define	release	%mkrel %rel
 
 Name:		%{name}
@@ -69,6 +69,9 @@ perl -pi -e "s#python2.4#python$PYTHON_VER#g" ./mmkeys/Makefile
 
 %py_compile $RPM_BUILD_ROOT/usr/share/exaile
 
+# Find the localization
+%find_lang %{name}
+
 %post
 %update_desktop_database
 %update_menus
@@ -80,7 +83,7 @@ perl -pi -e "s#python2.4#python$PYTHON_VER#g" ./mmkeys/Makefile
 %clean 
 rm -rf $RPM_BUILD_ROOT 
 
-%files 
+%files -f %name.lang
 %defattr(-,root,root)
 %doc TODO
 %_bindir/%name
@@ -88,5 +91,3 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/applications/*
 %_datadir/pixmaps/*
 %_menudir/%name
-
-
