@@ -59,7 +59,7 @@ EOF
 # Mandrivaify the desktop file
 perl -pi -e "s#Categories=#Categories=X-MandrivaLinux-Multimedia-Sound;Sound;GNOME;#" ./exaile.desktop
 # Mandrivaify the default settings
-perl -pi -e "s#/media/ipod#/mnt/removable#g" ./xl/prefs.py ./xl/panels.py
+perl -pi -e "s#/media/ipod#/media/disk#g" ./xl/prefs.py ./xl/panels.py
 # Patch the makefile for later pythons
 PYTHON_VER=%py_ver	# Don't ask me why this hack is needed, but it is.
 perl -pi -e "s#python2.4#python$PYTHON_VER#g" ./mmkeys/Makefile
