@@ -1,7 +1,7 @@
 %define	name	exaile
 %define	version 0.2.9
 %define realver %version
-%define rel	1
+%define rel	2
 %define	release	%mkrel %rel
 
 Name:		%{name}
@@ -9,6 +9,7 @@ Summary:	A powerful GTK+ 2.x media player
 Version:	%{version} 
 Release:	%{release} 
 Source0:	%{name}_%{realver}.tar.bz2
+Patch0:		exaile_0.2.9_tildeexpansion.patch
 URL:		http://www.exaile.org/
 Group:		Sound
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -43,6 +44,7 @@ Some of the features are:
 
 %prep
 %setup -q -n %{name}_%realver
+%patch0
 
 %install
 rm -rf $RPM_BUILD_ROOT
