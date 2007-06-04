@@ -1,7 +1,7 @@
 %define	name	exaile
 %define	version 0.2.9
 %define realver %version
-%define rel	2
+%define rel	3
 %define	release	%mkrel %rel
 
 Name:		%{name}
@@ -15,7 +15,7 @@ Group:		Sound
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPL
 BuildRequires:	pygtk2.0-devel python-devel
-Requires:	pygtk2.0 python-sqlite2 gstreamer0.10-python
+Requires:	pygtk2.0 python-sqlite2 gstreamer0.10-python pygtk2.0-libglade
 Requires:	gstreamer0.10-plugins-good gstreamer0.10-plugins-base 
 Requires:	gstreamer0.10-plugins-ugly
 Requires:	dbus-python
