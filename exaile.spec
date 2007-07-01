@@ -14,7 +14,7 @@ URL:		http://www.exaile.org/
 Group:		Sound
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPL
-BuildRequires:	pygtk2.0-devel python-devel
+BuildRequires:	pygtk2.0-devel python-devel intltool
 Requires:	pygtk2.0 python-sqlite2 gstreamer0.10-python pygtk2.0-libglade
 Requires:	gstreamer0.10-plugins-good gstreamer0.10-plugins-base 
 Requires:	gstreamer0.10-plugins-ugly
