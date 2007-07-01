@@ -9,6 +9,7 @@ Summary:	A powerful GTK+ 2.x media player
 Version:	%{version} 
 Release:	%{release} 
 Source0:	%{name}_%{realver}.tar.bz2
+Patch1:		color_depth.patch
 URL:		http://www.exaile.org/
 Group:		Sound
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -43,6 +44,7 @@ Some of the features are:
 
 %prep
 %setup -q -n %{name}_%realver
+%patch1
 
 %install
 rm -rf $RPM_BUILD_ROOT
