@@ -66,7 +66,7 @@ perl -pi -e "s#/media/ipod#/media/disk#g" ./xl/prefs.py ./xl/panels.py
 PYTHON_VER=%py_ver	# Don't ask me why this hack is needed, but it is.
 perl -pi -e "s#python2.4#python$PYTHON_VER#g" ./mmkeys/Makefile
 
-%make		DESTDIR=$RPM_BUILD_ROOT PREFIX=/usr/
+make		DESTDIR=$RPM_BUILD_ROOT PREFIX=/usr/
 %makeinstall	DESTDIR=$RPM_BUILD_ROOT PREFIX=/usr/
 
 %py_compile $RPM_BUILD_ROOT/usr/share/exaile
