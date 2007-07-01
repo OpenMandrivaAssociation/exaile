@@ -1,7 +1,7 @@
 %define	name	exaile
-%define	version 0.2.9
+%define	version 0.2.10
 %define realver %version
-%define rel	3
+%define rel	1
 %define	release	%mkrel %rel
 
 Name:		%{name}
@@ -9,7 +9,6 @@ Summary:	A powerful GTK+ 2.x media player
 Version:	%{version} 
 Release:	%{release} 
 Source0:	%{name}_%{realver}.tar.bz2
-Patch0:		exaile_0.2.9_tildeexpansion.patch
 URL:		http://www.exaile.org/
 Group:		Sound
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -19,7 +18,7 @@ Requires:	pygtk2.0 python-sqlite2 gstreamer0.10-python pygtk2.0-libglade
 Requires:	gstreamer0.10-plugins-good gstreamer0.10-plugins-base 
 Requires:	gstreamer0.10-plugins-ugly
 Requires:	dbus-python
-Requires:	mutagen python-elementtree gnome-python-gtkhtml2
+Requires:	mutagen python-elementtree gnome-python-gtkmozembed
 %if %mdvver > 200700
 Requires:	python-notify
 %endif
@@ -44,7 +43,6 @@ Some of the features are:
 
 %prep
 %setup -q -n %{name}_%realver
-%patch0
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -66,8 +64,8 @@ perl -pi -e "s#/media/ipod#/media/disk#g" ./xl/prefs.py ./xl/panels.py
 PYTHON_VER=%py_ver	# Don't ask me why this hack is needed, but it is.
 perl -pi -e "s#python2.4#python$PYTHON_VER#g" ./mmkeys/Makefile
 
-%make		DESTDIR=$RPM_BUILD_ROOT
-%makeinstall	DESTDIR=$RPM_BUILD_ROOT
+%make		DESTDIR=$RPM_BUILD_ROOT PREFIX=/usr/
+%makeinstall	DESTDIR=$RPM_BUILD_ROOT PREFIX=/usr/
 
 %py_compile $RPM_BUILD_ROOT/usr/share/exaile
 
@@ -93,3 +91,5 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/applications/*
 %_datadir/pixmaps/*
 %_menudir/%name
+%_libdir/exaile/mmkeys.so
+%_datadir/man/man1/exaile.1.bz2
