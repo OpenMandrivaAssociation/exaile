@@ -94,4 +94,4 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/pixmaps/*
 %_menudir/%name
 %_libdir/exaile/mmkeys.so
-%_datadir/man/man1/exaile.1.bz2
+%_datadir/man/man1/exaile.*
