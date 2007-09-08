@@ -9,7 +9,6 @@ Summary:	A powerful GTK+ 2.x media player
 Version:	%{version} 
 Release:	%{release} 
 Source0:	%{name}_%{realver}.tar.bz2
-Patch1:		color_depth.patch
 URL:		http://www.exaile.org/
 Group:		Sound
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -22,6 +21,7 @@ Requires:	dbus-python
 Requires:	mutagen python-elementtree gnome-python-gtkmozembed
 %if %mdvver > 200700
 Requires:	python-notify
+Requires:	python-gpod
 %endif
 
 %description
@@ -44,7 +44,11 @@ Some of the features are:
 
 %prep
 %setup -q -n %{name}_%realver
-%patch1
+
+#Fix typo in the desktop file
+sed -i 's/MimeType=M/M/' exaile.desktop 
+# remove shebangs from all files as none should be executable scripts
+sed -e '/^#!\//,1 d' -i plugins/*.py exaile.py
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -67,9 +71,14 @@ PYTHON_VER=%py_ver	# Don't ask me why this hack is needed, but it is.
 perl -pi -e "s#python2.4#python$PYTHON_VER#g" ./mmkeys/Makefile
 
 make		DESTDIR=$RPM_BUILD_ROOT PREFIX=/usr/ LIBDIR=%_libdir
-%makeinstall	DESTDIR=$RPM_BUILD_ROOT PREFIX=/usr/
+#%makeinstall	DESTDIR=$RPM_BUILD_ROOT PREFIX=/usr/
+make install PREFIX=%{_prefix} LIBDIR=%{_libdir} DESTDIR=%{buildroot}
 
-%py_compile $RPM_BUILD_ROOT/usr/share/exaile
+#%py_compile $RPM_BUILD_ROOT/usr/share/exaile
+
+chmod 755 %{buildroot}%{_bindir}/exaile
+
+chmod 755 %{buildroot}%{_libdir}/exaile/mmkeys.so
 
 # Find the localization
 %find_lang %{name}
