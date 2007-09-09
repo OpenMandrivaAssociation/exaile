@@ -11,18 +11,29 @@ Release:	%{release}
 Source0:	%{name}_%{realver}.tar.bz2
 URL:		http://www.exaile.org/
 Group:		Sound
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPL
-BuildRequires:	pygtk2.0-devel python-devel intltool
-Requires:	pygtk2.0 python-sqlite2 gstreamer0.10-python pygtk2.0-libglade
-Requires:	gstreamer0.10-plugins-good gstreamer0.10-plugins-base 
+BuildRequires:	pygtk2.0-devel
+BuildRequires:	python-devel
+BuildRequires:	intltool
+BuildRequires:	perl(XML::Parser)
+Requires:	pygtk2.0
+Requires:	python-sqlite2
+Requires:	pygtk2.0-libglade
+Requires:	gstreamer0.10-python
+Requires:	gstreamer0.10-plugins-good
+Requires:	gstreamer0.10-plugins-base 
 Requires:	gstreamer0.10-plugins-ugly
 Requires:	dbus-python
-Requires:	mutagen python-elementtree gnome-python-gtkmozembed
+Requires:	mutagen python-elementtree
+#Requires:	gnome-python-gtkmozembed
 %if %mdvver > 200700
 Requires:	python-notify
 Requires:	python-gpod
+Requires:	python-CDDB
+Requires:	python-sexy
+Requires:	python-gamin
 %endif
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Exaile is a media player aiming to be similar to KDE's AmaroK,
@@ -50,29 +61,20 @@ sed -i 's/MimeType=M/M/' exaile.desktop
 # remove shebangs from all files as none should be executable scripts
 sed -e '/^#!\//,1 d' -i plugins/*.py exaile.py
 
-%install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-cat > $RPM_BUILD_ROOT%{_menudir}/%{name} << EOF
-?package(%name): needs="x11" \
-        section="Multimedia/Sound" \
-        title="Exaile" \
-        longtitle="Listen to, browse, or edit your audio collection"\
-        command="%{_bindir}/%{name}" \
-        icon="%{name}.png" \
-        xdg="true"
-EOF
-# Mandrivaify the desktop file
-perl -pi -e "s#Categories=#Categories=X-MandrivaLinux-Multimedia-Sound;Sound;GNOME;#" ./exaile.desktop
+%build
+export CFLAGS="%{optflags}"
+
 # Mandrivaify the default settings
 perl -pi -e "s#/media/ipod#/media/disk#g" ./xl/prefs.py ./xl/panels.py
 # Patch the makefile for later pythons
-PYTHON_VER=%py_ver	# Don't ask me why this hack is needed, but it is.
+PYTHON_VER=%{py_ver}	# Don't ask me why this hack is needed, but it is.
 perl -pi -e "s#python2.4#python$PYTHON_VER#g" ./mmkeys/Makefile
 
-make		DESTDIR=$RPM_BUILD_ROOT PREFIX=/usr/ LIBDIR=%_libdir
-#%makeinstall	DESTDIR=$RPM_BUILD_ROOT PREFIX=/usr/
-make install PREFIX=%{_prefix} LIBDIR=%{_libdir} DESTDIR=%{buildroot}
+%make
+
+%install
+rm -rf %{buildroot}
+%makeinstall_std PREFIX=%{_prefix} LIBDIR=%{_libdir} DESTDIR=%{buildroot}
 
 #%py_compile $RPM_BUILD_ROOT/usr/share/exaile
 
@@ -84,23 +86,24 @@ chmod 755 %{buildroot}%{_libdir}/exaile/mmkeys.so
 %find_lang %{name}
 
 %post
-%update_desktop_database
-%update_menus
+%{update_menus}
+%{update_desktop_database}
 
 %postun
-%clean_desktop_database
-%update_menus
+%{update_menus}
+%{clean_desktop_database}
 
 %clean 
-rm -rf $RPM_BUILD_ROOT 
+rm -rf %{buildroot}
 
 %files -f %name.lang
 %defattr(-,root,root)
 %doc TODO
-%_bindir/%name
-%_datadir/%name/
-%_datadir/applications/*
-%_datadir/pixmaps/*
-%_menudir/%name
-%_libdir/exaile/mmkeys.so
-%_mandir/man1/exaile.*
+%dir %{_libdir}/%{name}
+%dir %{_datadir}/%{name}
+%{_bindir}/%{name}
+%{_datadir}/%{name}/*
+%{_datadir}/applications/*
+%{_datadir}/pixmaps/*
+%{_libdir}/%{name}/mmkeys.so
+%{_mandir}/man1/*
