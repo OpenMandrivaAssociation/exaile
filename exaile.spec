@@ -1,14 +1,14 @@
 %define	name	exaile
 %define	version 0.2.10
 %define realver %version
-%define rel	2
+%define rel	3
 %define	release	%mkrel %rel
 
 Name:		%{name}
 Summary:	A powerful GTK+ 2.x media player
 Version:	%{version} 
 Release:	%{release} 
-Source0:	%{name}_%{realver}.tar.bz2
+Source0:	http://www.exaile.org/files/%{name}_%{realver}.tar.bz2
 Patch0:		color_depth.patch
 URL:		http://www.exaile.org/
 Group:		Sound
@@ -26,7 +26,7 @@ Requires:	gstreamer0.10-plugins-base
 Requires:	gstreamer0.10-plugins-ugly
 Requires:	dbus-python
 Requires:	mutagen python-elementtree
-#Requires:	gnome-python-gtkmozembed
+Requires:	gnome-python-gtkmozembed
 %if %mdvver > 200700
 Requires:	python-notify
 Requires:	python-gpod
