@@ -1,7 +1,7 @@
 %define	name	exaile
 %define	version 0.2.10
 %define realver %version
-%define rel	1
+%define rel	2
 %define	release	%mkrel %rel
 
 Name:		%{name}
@@ -9,6 +9,7 @@ Summary:	A powerful GTK+ 2.x media player
 Version:	%{version} 
 Release:	%{release} 
 Source0:	%{name}_%{realver}.tar.bz2
+Patch0:		color_depth.patch
 URL:		http://www.exaile.org/
 Group:		Sound
 License:	GPL
@@ -55,6 +56,7 @@ Some of the features are:
 
 %prep
 %setup -q -n %{name}_%realver
+%patch0
 
 #Fix typo in the desktop file
 sed -i 's/MimeType=M/M/' exaile.desktop 
