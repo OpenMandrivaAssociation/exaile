@@ -1,15 +1,11 @@
-%define	name	exaile
-%define	version 0.2.10
-%define realver %version
-%define rel	3
-%define	release	%mkrel %rel
+%define prel b
+%define ffver firefox-2.0.0.6
 
-Name:		%{name}
 Summary:	A powerful GTK+ 2.x media player
-Version:	%{version} 
-Release:	%{release} 
-Source0:	http://www.exaile.org/files/%{name}_%{realver}.tar.bz2
-Patch0:		color_depth.patch
+Name:		exaile
+Version:	0.2.11
+Release:	%mkrel 0.%{prel}.1
+Source0:	http://www.exaile.org/files/%{name}_%{version}%{prel}.tar.bz2
 URL:		http://www.exaile.org/
 Group:		Sound
 License:	GPL
@@ -55,13 +51,15 @@ Some of the features are:
 - submitting played tracks on the iPod to last.fm
 
 %prep
-%setup -q -n %{name}_%realver
-%patch0
+%setup -q -n %{name}_%{version}%{prel}
 
 #Fix typo in the desktop file
 sed -i 's/MimeType=M/M/' exaile.desktop 
 # remove shebangs from all files as none should be executable scripts
 sed -e '/^#!\//,1 d' -i plugins/*.py exaile.py
+
+# (tpg) do not hardcode icon extension
+perl -pi -e 's/%{name}.png/%{name}/g' %{name}.desktop
 
 %build
 export CFLAGS="%{optflags}"
@@ -76,13 +74,15 @@ perl -pi -e "s#python2.4#python$PYTHON_VER#g" ./mmkeys/Makefile
 
 %install
 rm -rf %{buildroot}
-%makeinstall_std PREFIX=%{_prefix} LIBDIR=%{_libdir} DESTDIR=%{buildroot}
+%makeinstall_std PREFIX=%{_prefix} LIBDIR=/%{_lib} FIREFOX=%{_libdir}/%{ffver} DESTDIR=%{buildroot}
 
 #%py_compile $RPM_BUILD_ROOT/usr/share/exaile
 
-chmod 755 %{buildroot}%{_bindir}/exaile
-
 chmod 755 %{buildroot}%{_libdir}/exaile/mmkeys.so
+chmod 755 %{buildroot}%{_libdir}/exaile/xl/burn.py
+chmod 755 %{buildroot}%{_libdir}/exaile/xl/plugins/gui.py
+chmod 755 %{buildroot}%{_libdir}/exaile/xl/cd_import.py
+
 
 # Find the localization
 %find_lang %{name}
@@ -107,5 +107,5 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}/*
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*
-%{_libdir}/%{name}/mmkeys.so
+%{_libdir}/%{name}/*
 %{_mandir}/man1/*
