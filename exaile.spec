@@ -1,11 +1,10 @@
-%define prel b
-%define ffver firefox-2.0.0.6
+%define ffver firefox-2.0.0.7
 
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
 Version:	0.2.11
-Release:	%mkrel 0.%{prel}.1
-Source0:	http://www.exaile.org/files/%{name}_%{version}%{prel}.tar.bz2
+Release:	%mkrel 1
+Source0:	http://www.exaile.org/files/%{name}_%{version}.tar.bz2
 URL:		http://www.exaile.org/
 Group:		Sound
 License:	GPL
@@ -51,7 +50,7 @@ Some of the features are:
 - submitting played tracks on the iPod to last.fm
 
 %prep
-%setup -q -n %{name}_%{version}%{prel}
+%setup -q -n %{name}_%{version}
 
 #Fix typo in the desktop file
 sed -i 's/MimeType=M/M/' exaile.desktop 
