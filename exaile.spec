@@ -50,7 +50,7 @@ Some of the features are:
 - submitting played tracks on the iPod to last.fm
 
 %prep
-%setup -q -n %{name}_%{version}
+%setup -q
 
 #Fix typo in the desktop file
 sed -i 's/MimeType=M/M/' exaile.desktop 
