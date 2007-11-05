@@ -1,9 +1,9 @@
-%define ffver firefox-2.0.0.8
+%define ffver firefox-2.0.0.9
 
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
 Version:	0.2.11
-Release:	%mkrel 2
+Release:	%mkrel 3
 Source0:	http://www.exaile.org/files/%{name}_%{version}.tar.bz2
 URL:		http://www.exaile.org/
 Group:		Sound
