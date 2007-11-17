@@ -2,8 +2,8 @@
 
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
-Version:	0.2.11
-Release:	%mkrel 3
+Version:	0.2.11.1
+Release:	%mkrel 1
 Source0:	http://www.exaile.org/files/%{name}_%{version}.tar.bz2
 URL:		http://www.exaile.org/
 Group:		Sound
