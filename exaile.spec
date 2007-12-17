@@ -29,7 +29,6 @@ Requires:	python-CDDB
 Requires:	python-sexy
 Requires:	python-gamin
 %endif
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Exaile is a media player aiming to be similar to KDE's AmaroK,
