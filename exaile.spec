@@ -3,11 +3,14 @@
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
 Version:	0.2.11.1
-Release:	%mkrel 2
+Release:	%mkrel 3
 Source0:	http://www.exaile.org/files/%{name}_%{version}.tar.bz2
 URL:		http://www.exaile.org/
 Group:		Sound
 License:	GPLv2+
+# (tpg) https://bugs.launchpad.net/exaile/+bug/136321
+Patch0:		exaile-136321-speed-up-trackdata-forpath-0.2.11.patch
+Patch1:		exaile-0.2.11.1-broken-unicode.patch
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-devel
 BuildRequires:	intltool
@@ -50,7 +53,9 @@ Some of the features are:
 - submitting played tracks on the iPod to last.fm
 
 %prep
-%setup -q -n%{name}_%{version}
+%setup -q -n %{name}_%{version}
+%patch0 -p0
+%patch1 -p1
 
 #Fix typo in the desktop file
 sed -i 's/MimeType=M/M/' exaile.desktop 
@@ -68,6 +73,9 @@ perl -pi -e "s#/media/ipod#/media/disk#g" ./xl/prefs.py ./xl/panels.py
 # Patch the makefile for later pythons
 PYTHON_VER=%{py_ver}	# Don't ask me why this hack is needed, but it is.
 perl -pi -e "s#python2.4#python$PYTHON_VER#g" ./mmkeys/Makefile
+
+# (tpg) https://bugs.launchpad.net/exaile/+bug/145250
+perl -pi -e "s/Exec=exaile/Exec=exaile --no-equalizer/g" %{name}.desktop
 
 %make
 
