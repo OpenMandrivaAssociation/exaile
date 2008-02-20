@@ -8,7 +8,6 @@ Source0:	http://www.exaile.org/files/%{name}_%{version}.tar.bz2
 URL:		http://www.exaile.org/
 Group:		Sound
 License:	GPLv2+
-Patch1:		exaile-0.2.11.1-broken-unicode.patch
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-devel
 BuildRequires:	intltool
@@ -52,7 +51,6 @@ Some of the features are:
 
 %prep
 %setup -q -n %{name}_%{version}
-%patch1 -p1
 
 #Fix typo in the desktop file
 sed -i 's/MimeType=M/M/' exaile.desktop 
