@@ -1,4 +1,4 @@
-%define ffver firefox-2.0.0.11
+%define ffver firefox-2.0.0.12
 
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
@@ -85,7 +85,6 @@ chmod 755 %{buildroot}%{_libdir}/exaile/xl/burn.py
 chmod 755 %{buildroot}%{_libdir}/exaile/xl/plugins/gui.py
 chmod 755 %{buildroot}%{_libdir}/exaile/xl/cd_import.py
 
-
 # Find the localization
 %find_lang %{name}
 
@@ -100,9 +99,8 @@ chmod 755 %{buildroot}%{_libdir}/exaile/xl/cd_import.py
 %clean 
 rm -rf %{buildroot}
 
-%files -f %name.lang
+%files -f %{name}.lang
 %defattr(-,root,root)
-%doc TODO
 %dir %{_libdir}/%{name}
 %dir %{_datadir}/%{name}
 %{_bindir}/%{name}
