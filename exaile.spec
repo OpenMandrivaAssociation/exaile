@@ -8,8 +8,6 @@ Source0:	http://www.exaile.org/files/%{name}_%{version}.tar.bz2
 URL:		http://www.exaile.org/
 Group:		Sound
 License:	GPLv2+
-# (tpg) https://bugs.launchpad.net/exaile/+bug/136321
-Patch0:		exaile-136321-speed-up-trackdata-forpath-0.2.11.patch
 Patch1:		exaile-0.2.11.1-broken-unicode.patch
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-devel
@@ -54,7 +52,6 @@ Some of the features are:
 
 %prep
 %setup -q -n %{name}_%{version}
-%patch0 -p0
 %patch1 -p1
 
 #Fix typo in the desktop file
