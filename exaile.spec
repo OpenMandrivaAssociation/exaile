@@ -3,15 +3,16 @@
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
 Version:	0.2.12
-Release:	%mkrel 1
+Release:	%mkrel 2
 Epoch:		1
-Source0:	http://www.exaile.org/files/%{name}_%{version}.tar.bz2
-URL:		http://www.exaile.org/
 Group:		Sound
 License:	GPLv2+
+URL:		http://www.exaile.org/
+Source0:	http://www.exaile.org/files/%{name}_%{version}.tar.bz2
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-devel
 BuildRequires:	intltool
+BuildRequires:	gettext-devel
 BuildRequires:	perl(XML::Parser)
 BuildRequires:	libmozilla-firefox-devel
 Requires:	pygtk2.0
