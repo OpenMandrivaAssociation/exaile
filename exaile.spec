@@ -1,9 +1,10 @@
-%define ffver firefox-2.0.0.12
+%define firefox_lib %(pkg-config --variable=libdir firefox-gtkmozembed)
 
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
-Version:	0.2.12b
+Version:	0.2.12
 Release:	%mkrel 1
+Epoch:		1
 Source0:	http://www.exaile.org/files/%{name}_%{version}.tar.bz2
 URL:		http://www.exaile.org/
 Group:		Sound
@@ -12,6 +13,7 @@ BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-devel
 BuildRequires:	intltool
 BuildRequires:	perl(XML::Parser)
+BuildRequires:	libmozilla-firefox-devel
 Requires:	pygtk2.0
 Requires:	python-sqlite2
 Requires:	pygtk2.0-libglade
@@ -50,7 +52,7 @@ Some of the features are:
 - submitting played tracks on the iPod to last.fm
 
 %prep
-%setup -q -n %{name}_%{version}
+%setup -q
 
 #Fix typo in the desktop file
 sed -i 's/MimeType=M/M/' exaile.desktop 
@@ -76,7 +78,7 @@ perl -pi -e "s/Exec=exaile/Exec=exaile --no-equalizer/g" %{name}.desktop
 
 %install
 rm -rf %{buildroot}
-%makeinstall_std PREFIX=%{_prefix} LIBDIR=/%{_lib} FIREFOX=%{_libdir}/%{ffver} DESTDIR=%{buildroot}
+%makeinstall_std PREFIX=%{_prefix} LIBDIR=/%{_lib} FIREFOX=%{firefox_lib} DESTDIR=%{buildroot}
 
 #%py_compile $RPM_BUILD_ROOT/usr/share/exaile
 
