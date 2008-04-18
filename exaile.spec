@@ -3,12 +3,13 @@
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
 Version:	0.2.13
-Release:	%mkrel 1
+Release:	%mkrel 2
 Epoch:		1
 Group:		Sound
 License:	GPLv2+
 URL:		http://www.exaile.org/
 Source0:	http://www.exaile.org/files/%{name}_%{version}.tar.bz2
+Patch0:		%{name}_0.2.13-support-xfburn.patch
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-devel
 BuildRequires:	intltool
@@ -54,6 +55,7 @@ Some of the features are:
 
 %prep
 %setup -q -n %{name}_%{version}
+%patch0 -p1 -b .xfburn
 
 #Fix typo in the desktop file
 sed -i 's/MimeType=M/M/' exaile.desktop 
