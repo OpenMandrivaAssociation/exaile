@@ -3,10 +3,10 @@
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
 Version:	0.2.13
-Release:	%mkrel 4
+Release:	%mkrel 5
 Epoch:		1
 Group:		Sound
-License:	GPLv2+
+License:	GPL+ and Artistic
 URL:		http://www.exaile.org/
 Source0:	http://www.exaile.org/files/%{name}_%{version}.tar.bz2
 Patch0:		%{name}_0.2.13-support-xfburn.patch
@@ -14,6 +14,7 @@ Patch0:		%{name}_0.2.13-support-xfburn.patch
 Patch1:		exaile-save_files_panel_dir.patch
 # (tpg) https://bugs.launchpad.net/exaile/+bug/207866
 Patch2:		dbhit-etc.patch
+Patch3:		%{name}_0.2.13-correct-ipod-mount-path.patch
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-devel
 BuildRequires:	intltool
@@ -62,34 +63,21 @@ Some of the features are:
 %patch0 -p1 -b .xfburn
 %patch1 -p0
 %patch2 -p0
+%patch3 -p1
 
-#Fix typo in the desktop file
-sed -i 's/MimeType=M/M/' exaile.desktop 
 # remove shebangs from all files as none should be executable scripts
-sed -e '/^#!\//,1 d' -i plugins/*.py exaile.py
-
-# (tpg) do not hardcode icon extension
-perl -pi -e 's/%{name}.png/%{name}/g' %{name}.desktop
+sed -e '/^#!\//,1 d' -i plugins/*.py xl/plugins/*.py xl/*.py exaile.py
+# (tpg) https://bugs.launchpad.net/exaile/+bug/145250
+perl -pi -e "s/Exec=exaile/Exec=exaile --no-equalizer/g" %{name}.desktop
 
 %build
 export CFLAGS="%{optflags}"
-
-# Mandrivaify the default settings
-perl -pi -e "s#/media/ipod#/media/disk#g" ./xl/prefs.py ./xl/panels.py
-# Patch the makefile for later pythons
-PYTHON_VER=%{py_ver}	# Don't ask me why this hack is needed, but it is.
-perl -pi -e "s#python2.4#python$PYTHON_VER#g" ./mmkeys/Makefile
-
-# (tpg) https://bugs.launchpad.net/exaile/+bug/145250
-perl -pi -e "s/Exec=exaile/Exec=exaile --no-equalizer/g" %{name}.desktop
 
 %make
 
 %install
 rm -rf %{buildroot}
 %makeinstall_std PREFIX=%{_prefix} LIBDIR=/%{_lib} FIREFOX=%{firefox_lib} DESTDIR=%{buildroot}
-
-#%py_compile $RPM_BUILD_ROOT/usr/share/exaile
 
 chmod 755 %{buildroot}%{_libdir}/exaile/mmkeys.so
 chmod 755 %{buildroot}%{_libdir}/exaile/xl/burn.py
