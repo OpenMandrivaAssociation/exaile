@@ -3,7 +3,7 @@
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
 Version:	0.2.13
-Release:	%mkrel 5
+Release:	%mkrel 6
 Epoch:		1
 Group:		Sound
 License:	GPL+ and Artistic
@@ -15,6 +15,12 @@ Patch1:		exaile-save_files_panel_dir.patch
 # (tpg) https://bugs.launchpad.net/exaile/+bug/207866
 Patch2:		dbhit-etc.patch
 Patch3:		%{name}_0.2.13-correct-ipod-mount-path.patch
+# (tpg) https://bugs.launchpad.net/exaile/+bug/211325
+Patch4:		exaile-collection_manual_rescan_fix.patch
+# (tpg) https://bugs.launchpad.net/exaile/+bug/233894
+Patch5:		list_performance.patch
+# (tpg) https://bugs.launchpad.net/exaile/+bug/233899
+Patch6:		tag_editor.patch
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-devel
 BuildRequires:	intltool
@@ -64,6 +70,9 @@ Some of the features are:
 %patch1 -p0
 %patch2 -p0
 %patch3 -p1
+%patch4 -p0
+%patch5 -p0
+%patch6 -p0
 
 # remove shebangs from all files as none should be executable scripts
 sed -e '/^#!\//,1 d' -i plugins/*.py xl/plugins/*.py xl/*.py exaile.py
