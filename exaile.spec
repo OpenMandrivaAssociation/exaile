@@ -96,13 +96,17 @@ chmod 755 %{buildroot}%{_libdir}/exaile/xl/cd_import.py
 # Find the localization
 %find_lang %{name}
 
+%if %mdkversion < 200900
 %post
 %{update_menus}
 %{update_desktop_database}
+%endif
 
+%if %mdkversion < 200900
 %postun
 %{update_menus}
 %{clean_desktop_database}
+%endif
 
 %clean 
 rm -rf %{buildroot}
