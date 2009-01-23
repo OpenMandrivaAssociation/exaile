@@ -1,12 +1,14 @@
+%define prel a1
+
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
-Version:	0.2.14
-Release:	%mkrel 2
+Version:	0.3.0
+Release:	%mkrel -c %prel 1
 Epoch:		1
 Group:		Sound
-License:	GPL+ and Artistic
+License:	GPLv3
 URL:		http://www.exaile.org/
-Source0:	http://www.exaile.org/files/%{name}_%{version}.tar.bz2
+Source0:	http://www.exaile.org/files/%{name}_%{version}%prel.tar.bz2
 Patch0:		%{name}_0.2.13-support-xfburn.patch
 # (tpg) https://bugs.launchpad.net/exaile/+bug/207866
 Patch3:		%{name}_0.2.13-correct-ipod-mount-path.patch
@@ -56,7 +58,7 @@ Some of the features are:
 - submitting played tracks on the iPod to last.fm
 
 %prep
-%setup -q
+%setup -qn %{name}-%{version}%prel
 %patch0 -p1 -b .xfburn
 %patch3 -p1
 %patch6 -p0
