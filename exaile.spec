@@ -59,13 +59,13 @@ Some of the features are:
 
 %prep
 %setup -qn %{name}-%{version}%prel
-%patch0 -p1 -b .xfburn
-%patch3 -p1
-%patch6 -p0
-%patch7 -p0
+#%patch0 -p1 -b .xfburn
+#%patch3 -p1
+#%patch6 -p0
+#%patch7 -p0
 
 # remove shebangs from all files as none should be executable scripts
-sed -e '/^#!\//,1 d' -i plugins/*.py xl/plugins/*.py xl/*.py exaile.py
+#sed -e '/^#!\//,1 d' -i plugins/*.py xl/plugins/*.py xl/*.py exaile.py
 
 # (tpg) https://bugs.launchpad.net/exaile/+bug/145250
 perl -pi -e "s/Exec=exaile/Exec=exaile --no-equalizer/g" %{name}.desktop
@@ -83,12 +83,12 @@ export CFLAGS="%{optflags}"
 
 %install
 rm -rf %{buildroot}
-%makeinstall_std GRE_CONF_PATH=%{gre_conf} PREFIX=%{_prefix} LIBDIR=%{_libdir} DESTDIR=%{buildroot}
+%makeinstall_std GRE_CONF_PATH=%{gre_conf} PREFIX=%{_prefix} LIBDIR=/%{_lib} DESTDIR=%{buildroot}
 
-chmod 755 %{buildroot}%{_libdir}/exaile/mmkeys.so
-chmod 755 %{buildroot}%{_libdir}/exaile/xl/burn.py
-chmod 755 %{buildroot}%{_libdir}/exaile/xl/plugins/gui.py
-chmod 755 %{buildroot}%{_libdir}/exaile/xl/cd_import.py
+#chmod 755 %{buildroot}%{_libdir}/exaile/mmkeys.so
+#chmod 755 %{buildroot}%{_libdir}/exaile/xl/burn.py
+#chmod 755 %{buildroot}%{_libdir}/exaile/xl/plugins/gui.py
+#chmod 755 %{buildroot}%{_libdir}/exaile/xl/cd_import.py
 
 # Find the localization
 %find_lang %{name}
@@ -117,4 +117,4 @@ rm -rf %{buildroot}
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*
 %{_libdir}/%{name}/*
-%{_mandir}/man1/*
+#%{_mandir}/man1/*
