@@ -1,4 +1,4 @@
-%define prel a1
+%define prel a2
 
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
