@@ -5,7 +5,7 @@
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
 Version:	0.3.0
-Release:	%mkrel -c %prel 1
+Release:	%mkrel -c %prel 2
 Epoch:		1
 Group:		Sound
 License:	GPLv3
@@ -88,7 +88,7 @@ export CFLAGS="%{optflags}"
 
 %install
 rm -rf %{buildroot}
-%makeinstall_std PREFIX=%{_prefix} LIBDIR=/%{_lib} DESTDIR=%{buildroot}
+%makeinstall_std PREFIX=%{_prefix} LIBDIR=/share DESTDIR=%{buildroot}
 #GRE_CONF_PATH=%{gre_conf} PREFIX=%{_prefix} LIBDIR=/%{_lib} DESTDIR=%{buildroot}
 
 #chmod 755 %{buildroot}%{_libdir}/exaile/mmkeys.so
@@ -116,11 +116,11 @@ rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
-%dir %{_libdir}/%{name}
+#%dir %{_libdir}/%{name}
 %dir %{_datadir}/%{name}
 %{_bindir}/%{name}
 %{_datadir}/%{name}/*
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*
-%{_libdir}/%{name}/*
+#%{_libdir}/%{name}/*
 #%{_mandir}/man1/*
