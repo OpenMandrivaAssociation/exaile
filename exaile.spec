@@ -1,3 +1,5 @@
+%define debug_package %{nil}
+
 %define prel a2
 
 Summary:	A powerful GTK+ 2.x media player
@@ -10,6 +12,7 @@ License:	GPLv3
 URL:		http://www.exaile.org/
 Source0:	http://www.exaile.org/files/%{name}_%{version}%prel.tar.bz2
 Patch0:		%{name}_0.2.13-support-xfburn.patch
+Patch1:		exaile_0.3.0a2-install_all_plugins.patch
 # (tpg) https://bugs.launchpad.net/exaile/+bug/207866
 Patch3:		%{name}_0.2.13-correct-ipod-mount-path.patch
 # (tpg) https://bugs.launchpad.net/exaile/+bug/233899
@@ -20,23 +23,24 @@ BuildRequires:	python-devel
 BuildRequires:	intltool
 BuildRequires:	gettext-devel
 BuildRequires:	perl(XML::Parser)
-BuildRequires:	gnome-python-gtkmozembed
+#BuildRequires:	gnome-python-gtkmozembed
 Requires:	pygtk2.0
 Requires:	python-sqlite2
 Requires:	pygtk2.0-libglade
 Requires:	gstreamer0.10-python
 Requires:	gstreamer0.10-plugins-good
-Requires:	gstreamer0.10-plugins-base 
+Requires:	gstreamer0.10-plugins-base
 Requires:	gstreamer0.10-plugins-ugly
 Requires:	dbus-python
 Requires:	mutagen
 Requires:	python-elementtree
-Requires:	gnome-python-gtkmozembed
+#Requires:	gnome-python-gtkmozembed
 Requires:	python-notify
 Requires:	python-gpod
 Requires:	python-CDDB
 Requires:	python-sexy
 Requires:	python-gamin
+BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -58,7 +62,8 @@ Some of the features are:
 - submitting played tracks on the iPod to last.fm
 
 %prep
-%setup -qn %{name}-%{version}%prel
+%setup -qn %{name}_%{version}%prel
+%patch1 -p1
 #%patch0 -p1 -b .xfburn
 #%patch3 -p1
 #%patch6 -p0
@@ -68,22 +73,23 @@ Some of the features are:
 #sed -e '/^#!\//,1 d' -i plugins/*.py xl/plugins/*.py xl/*.py exaile.py
 
 # (tpg) https://bugs.launchpad.net/exaile/+bug/145250
-perl -pi -e "s/Exec=exaile/Exec=exaile --no-equalizer/g" %{name}.desktop
+#perl -pi -e "s/Exec=exaile/Exec=exaile --no-equalizer/g" %{name}.desktop
 
 %build
 export CFLAGS="%{optflags}"
 
-%ifarch x86_64
-%define gre_conf %{_sysconfdir}/gre.d/1.9-64.system.conf
-%else
-%define gre_conf %{_sysconfdir}/gre.d/1.9.system.conf
-%endif
+#ifarch x86_64
+#define gre_conf %{_sysconfdir}/gre.d/1.9-64.system.conf
+#else
+#define gre_conf %{_sysconfdir}/gre.d/1.9.system.conf
+#endif
 
 %make
 
 %install
 rm -rf %{buildroot}
-%makeinstall_std GRE_CONF_PATH=%{gre_conf} PREFIX=%{_prefix} LIBDIR=/%{_lib} DESTDIR=%{buildroot}
+%makeinstall_std PREFIX=%{_prefix} LIBDIR=/%{_lib} DESTDIR=%{buildroot}
+#GRE_CONF_PATH=%{gre_conf} PREFIX=%{_prefix} LIBDIR=/%{_lib} DESTDIR=%{buildroot}
 
 #chmod 755 %{buildroot}%{_libdir}/exaile/mmkeys.so
 #chmod 755 %{buildroot}%{_libdir}/exaile/xl/burn.py
