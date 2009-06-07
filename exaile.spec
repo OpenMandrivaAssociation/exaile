@@ -5,7 +5,7 @@
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
 Version:	0.3.0
-Release:	%mkrel -c %prel 2
+Release:	%mkrel -c %prel 3
 Epoch:		1
 Group:		Sound
 License:	GPLv3
@@ -40,6 +40,7 @@ Requires:	python-gpod
 Requires:	python-CDDB
 Requires:	python-sexy
 Requires:	python-gamin
+Requires:	python-pyinotify
 BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
