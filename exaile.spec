@@ -60,7 +60,7 @@ export CFLAGS="%{optflags}"
 
 %install
 rm -rf %{buildroot}
-%makeinstall_std PREFIX=%{_prefix} LIBDIR=/share DESTDIR=%{buildroot}
+%makeinstall_std PREFIX=%{_prefix} LIBINSTALLDIR=/share DESTDIR=%{buildroot}
 
 # Find the localization
 %find_lang %{name}
@@ -82,7 +82,6 @@ rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
-%dir %{_libdir}/%{name}
 %dir %{_datadir}/%{name}
 %dir %{_sysconfdir}/xdg/exaile
 %{_sysconfdir}/xdg/exaile/settings.ini
@@ -90,4 +89,3 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}/*
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*
-%{_libdir}/%{name}/*
