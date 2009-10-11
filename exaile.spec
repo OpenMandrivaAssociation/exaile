@@ -3,7 +3,7 @@
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
 Version:	0.3.0.1
-Release:	%mkrel 1
+Release:	%mkrel 2
 Epoch:		1
 Group:		Sound
 License:	GPLv3
@@ -21,6 +21,8 @@ Requires:	gstreamer0.10-python
 Requires:	gstreamer0.10-plugins-good
 Requires:	gstreamer0.10-plugins-base
 Requires:	gstreamer0.10-plugins-ugly
+Requires:	gstreamer0.10-cdio
+Requires:	gstreamer0.10-moodbar
 Requires:	dbus-python
 Requires:	mutagen
 Requires:	python-elementtree
