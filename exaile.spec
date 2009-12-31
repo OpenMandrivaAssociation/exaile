@@ -3,12 +3,16 @@
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
 Version:	0.3.0.2
-Release:	%mkrel 1
+Release:	%mkrel 2
 Epoch:		1
 Group:		Sound
 License:	GPLv3
 URL:		http://www.exaile.org/
 Source0:	http://www.exaile.org/files/%{name}-%{version}.tar.bz2
+# (tpg) somehow a musictracker plugin for pidgin doesn work... http://code.google.com/p/pidgin-musictracker/issues/detail?id=164
+# let's use native plugin for exaile
+# http://sourceforge.net/projects/exailemusictrac/
+Source1:	http://downloads.sourceforge.net/project/exailemusictrac/%{name}musictracker-0.1.1.tar.gz
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	python-devel
 BuildRequires:	intltool
@@ -55,6 +59,8 @@ Some of the features are:
 
 %prep
 %setup -q
+# (tpg) unpack the plugin
+tar xf %{SOURCE1} -C plugins/
 
 %build
 export CFLAGS="%{optflags}"
