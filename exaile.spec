@@ -1,15 +1,14 @@
 %define debug_package %{nil}
-%define rel b
 
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
-Version:	0.3.1
-Release:	%mkrel -c %rel 2
+Version:	0.3.1.0
+Release:	%mkrel 1
 Epoch:		1
 Group:		Sound
 License:	GPLv3
 URL:		http://www.exaile.org/
-Source0:	http://www.exaile.org/files/%{name}-%{version}%rel.tar.bz2
+Source0:	http://www.exaile.org/files/%{name}-%{version}.tar.bz2
 # (tpg) somehow a musictracker plugin for pidgin doesnt work... http://code.google.com/p/pidgin-musictracker/issues/detail?id=164
 # let's use native plugin for exaile
 # http://sourceforge.net/projects/exailemusictrac/
@@ -59,7 +58,7 @@ Some of the features are:
 - submitting played tracks on the iPod to last.fm
 
 %prep
-%setup -qn %{name}-%{version}%rel
+%setup -qn %{name}-%{version}
 # (tpg) unpack the plugin
 tar xf %{SOURCE1} -C plugins/
 
