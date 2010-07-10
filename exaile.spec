@@ -2,7 +2,7 @@
 
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
-Version:	0.3.1.1
+Version:	0.3.2.0
 Release:	%mkrel 1
 Epoch:		1
 Group:		Sound
@@ -14,10 +14,12 @@ Source0:	http://www.exaile.org/files/%{name}-%{version}.tar.bz2
 # http://sourceforge.net/projects/exailemusictrac/
 Source1:	http://downloads.sourceforge.net/project/exailemusictrac/%{name}musictracker-0.1.2.tar.bz2
 BuildRequires:	pygtk2.0-devel
+BuildRequires:	python-gobject-devel
 BuildRequires:	python-devel
 BuildRequires:	intltool
 BuildRequires:	gettext-devel
 BuildRequires:	perl(XML::Parser)
+BuildRequires:	help2man
 Requires:	pygtk2.0
 Requires:	python-sqlite2
 Requires:	pygtk2.0-libglade
@@ -97,3 +99,4 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}/*
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*
+%{_mandir}/man1/%{name}.*
