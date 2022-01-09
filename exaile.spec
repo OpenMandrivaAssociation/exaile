@@ -2,42 +2,41 @@
 
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
-Version:	0.3.2.2
-Release:	2
-Epoch:		1
+Version:	4.1.1
+Release:	1
 Group:		Sound
 License:	GPLv3
 URL:		http://www.exaile.org/
-Source0:	http://www.exaile.org/files/%{name}-%{version}.tar.bz2
-# (tpg) somehow a musictracker plugin for pidgin doesnt work... http://code.google.com/p/pidgin-musictracker/issues/detail?id=164
-# let's use native plugin for exaile
-# http://sourceforge.net/projects/exailemusictrac/
-Source1:	http://downloads.sourceforge.net/project/exailemusictrac/%{name}musictracker-0.1.2.tar.bz2
-BuildRequires:	pygtk2.0-devel
-BuildRequires:	python-gobject-devel
-BuildRequires:	python-devel
+Source0:	https://github.com/exaile/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+BuildRequires:	pkgconfig(pygobject-3.0)
+BuildRequires:	pkgconfig(python)
 BuildRequires:	intltool
-BuildRequires:	gettext-devel
-BuildRequires:	perl(XML::Parser)
+BuildRequires:	gettext
 BuildRequires:	help2man
-Requires:	pygtk2.0
-Requires:	python-sqlite2
-Requires:	pygtk2.0-libglade
-Requires:	gstreamer0.10-python
-Requires:	gstreamer0.10-plugins-good
-Requires:	gstreamer0.10-plugins-base
-Requires:	gstreamer0.10-plugins-ugly
-Requires:	gstreamer0.10-cdio
-Requires:	gstreamer0.10-moodbar
-Requires:	dbus-python
-Requires:	mutagen
-Requires:	python-elementtree
-Requires:	python-notify
-Requires:	python-gpod
-Requires:	python-CDDB
-Requires:	python-sexy
-Requires:	python-gamin
-Requires:	python-pyinotify
+BuildRequires:	gobject-introspection
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
+BuildRequires:	python3dist(sphinx)
+
+Requires:	gstreamer1.0-plugins-good
+Requires:	gstreamer1.0-plugins-base 
+Requires:	gstreamer1.0-plugins-ugly
+Requires:	gstreamer1.0-plugins-bad
+Requires:	gstreamer1.0-cdio
+Requires:	python3dist(beautifulsoup4)
+Requires:	python3dist(pycairo)
+Requires:	python-gi
+Requires:	python3dist(dbus)
+Requires:	python3dist(feedparser)
+Requires:	python-gobject3
+Requires:	python-gstreamer1.0
+#Requires:	python3-musicbrainzngs
+Requires:	python3dist(mutagen)
+Requires:	python3dist(pylast)
+Requires:	typelib(GstBase)
+Requires:	typelib(Gtk) = 3.0
+Requires:	typelib(Keybinder)
+Requires:	typelib(Rsvg)
+Requires:	udisks2
 BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -61,34 +60,18 @@ Some of the features are:
 
 %prep
 %setup -qn %{name}-%{version}
-# (tpg) unpack the plugin
-tar xf %{SOURCE1} -C plugins/
 
 %build
-export CFLAGS="%{optflags}"
-%make
+
+%make_build
 
 %install
-rm -rf %{buildroot}
-%makeinstall_std PREFIX=%{_prefix} LIBINSTALLDIR=/share DESTDIR=%{buildroot}
+
+%make_install
 
 # Find the localization
 %find_lang %{name}
 
-%if %mdkversion < 200900
-%post
-%{update_menus}
-%{update_desktop_database}
-%endif
-
-%if %mdkversion < 200900
-%postun
-%{update_menus}
-%{clean_desktop_database}
-%endif
-
-%clean
-rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
