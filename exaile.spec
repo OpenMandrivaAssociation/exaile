@@ -73,18 +73,16 @@ Some of the features are:
 # Find the localization
 %find_lang %{name}
 
-
 %files -f %{name}.lang
-%defattr(-,root,root)
-%dir %{_datadir}/%{name}
-%dir %{_sysconfdir}/xdg/exaile
-%{_sysconfdir}/xdg/exaile/settings.ini
+%doc README.md
+%config(noreplace) %{_sysconfdir}/xdg/%{name}/
 %{_bindir}/%{name}
+%dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*
-%{_datadir}/applications/*
-%{_datadir}/pixmaps/*
-%{_mandir}/man1/%{name}.*
-
+%{_datadir}/applications/*.desktop
+%{_datadir}/appdata/%{name}.appdata.xml
+%{_datadir}/pixmaps/%{name}.*
+%{_datadir}/dbus-1/services/org.%{name}.Exaile.service
 
 %changelog
 * Sat Jul 30 2011 Tomasz Pawel Gajc <tpg@mandriva.org> 1:0.3.2.2-1mdv2012.0
