@@ -68,7 +68,9 @@ Some of the features are:
 
 %install
 
-%make_install
+# Exaile launcher works with LIBINSTALLDIR which is a relative path from %%{_prefix}.
+%makeinstall_std PREFIX=%{_prefix} LIBINSTALLDIR=%{_datadir} DESTDIR=%{buildroot}
+
 
 # Find the localization
 %find_lang %{name}
