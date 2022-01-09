@@ -64,7 +64,7 @@ Some of the features are:
 
 %build
 
-%make_build
+%make locale
 
 %install
 
