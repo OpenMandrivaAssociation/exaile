@@ -1,4 +1,5 @@
 %define debug_package %{nil}
+%global	__requires_exclude "typelib(GtkosxApplication)"
 
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
@@ -26,7 +27,7 @@ Requires:	gstreamer1.0-cdio
 Requires:	python3dist(beautifulsoup4)
 Requires:	python3dist(pycairo)
 Requires:	python-gi
-Requires:	python3dist(dbus)
+Requires:	python3dist(dbus-python)
 Requires:	python3dist(feedparser)
 Requires:	python-gobject3
 Requires:	python-gstreamer1.0
