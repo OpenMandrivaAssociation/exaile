@@ -1,4 +1,5 @@
 %define debug_package %{nil}
+%global __requires_exclude	%{?__requires_exclude:%__requires_exclude|}typelib\\(GtkosxApplication
 
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
@@ -26,7 +27,7 @@ Requires:	gstreamer1.0-cdio
 Requires:	python3dist(beautifulsoup4)
 Requires:	python3dist(pycairo)
 Requires:	python-gi
-Requires:	python3dist(dbus)
+Requires:	python3dist(dbus-python)
 Requires:	python3dist(feedparser)
 Requires:	python-gobject3
 Requires:	python-gstreamer1.0
@@ -64,27 +65,27 @@ Some of the features are:
 
 %build
 
-%make_build
+%make locale
 
 %install
 
-%make_install
+# Exaile launcher works with LIBINSTALLDIR which is a relative path from %%{_prefix}.
+%makeinstall_std PREFIX=%{_prefix} LIBINSTALLDIR=%{_datadir} DESTDIR=%{buildroot}
+
 
 # Find the localization
 %find_lang %{name}
 
-
 %files -f %{name}.lang
-%defattr(-,root,root)
-%dir %{_datadir}/%{name}
-%dir %{_sysconfdir}/xdg/exaile
-%{_sysconfdir}/xdg/exaile/settings.ini
+%doc README.md
+%config(noreplace) %{_sysconfdir}/xdg/%{name}/
 %{_bindir}/%{name}
+%dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*
-%{_datadir}/applications/*
-%{_datadir}/pixmaps/*
-%{_mandir}/man1/%{name}.*
-
+%{_datadir}/applications/*.desktop
+%{_datadir}/appdata/%{name}.appdata.xml
+%{_datadir}/pixmaps/%{name}.*
+%{_datadir}/dbus-1/services/org.%{name}.Exaile.service
 
 %changelog
 * Sat Jul 30 2011 Tomasz Pawel Gajc <tpg@mandriva.org> 1:0.3.2.2-1mdv2012.0
