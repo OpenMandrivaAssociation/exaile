@@ -1,5 +1,5 @@
 %define debug_package %{nil}
-%global	__requires_exclude "typelib(GtkosxApplication)"
+%global __requires_exclude	%{?__requires_exclude:%__requires_exclude|}typelib\\(GtkosxApplication
 
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
