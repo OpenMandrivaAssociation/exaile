@@ -8,6 +8,7 @@ Group:		Sound
 License:	GPLv3
 URL:		http://www.exaile.org/
 Source0:	https://github.com/exaile/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+BuildRequires:  gir-repository
 BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(python)
 BuildRequires:	intltool
