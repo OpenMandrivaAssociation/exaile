@@ -83,7 +83,7 @@ Some of the features are:
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*
 %{_datadir}/applications/*.desktop
-
+%{_datadir}/metainfo/exaile.appdata.xml
 %{_datadir}/pixmaps/%{name}.*
 %{_datadir}/dbus-1/services/org.%{name}.Exaile.service
 
