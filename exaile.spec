@@ -4,7 +4,7 @@
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
 Version:	4.1.2
-Release:	1
+Release:	2
 Group:		Sound
 License:	GPLv3
 URL:		http://www.exaile.org/
@@ -34,6 +34,7 @@ Requires:	python-gstreamer1.0
 #Requires:	python3-musicbrainzngs
 Requires:	python3dist(mutagen)
 Requires:	python3dist(pylast)
+Requires: python3dist(bsddb3)
 Requires:	typelib(GstBase)
 Requires:	typelib(Gtk) = 3.0
 Requires:	typelib(Keybinder)
