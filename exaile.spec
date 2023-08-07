@@ -3,8 +3,8 @@
 
 Summary:	A powerful GTK+ 2.x media player
 Name:		exaile
-Version:	4.1.2
-Release:	2
+Version:	4.1.3
+Release:	1
 Group:		Sound
 License:	GPLv3
 URL:		http://www.exaile.org/
