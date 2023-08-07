@@ -1,10 +1,10 @@
 %define debug_package %{nil}
 %global __requires_exclude	%{?__requires_exclude:%__requires_exclude|}typelib\\(GtkosxApplication
 
-Summary:	A powerful GTK+ 2.x media player
+Summary:	A powerful GTK+ media player
 Name:		exaile
-Version:	4.1.2
-Release:	2
+Version:	4.1.3
+Release:	1
 Group:		Sound
 License:	GPLv3
 URL:		http://www.exaile.org/
@@ -85,8 +85,9 @@ Some of the features are:
 %{_datadir}/%{name}/*
 %{_datadir}/applications/*.desktop
 %{_datadir}/metainfo/exaile.appdata.xml
-%{_datadir}/pixmaps/%{name}.*
 %{_datadir}/dbus-1/services/org.%{name}.Exaile.service
+%{_iconsdir}/hicolor/*x*/apps/exaile.png
+%{_iconsdir}/hicolor/scalable/apps/exaile.svg
 
 %changelog
 * Sat Jul 30 2011 Tomasz Pawel Gajc <tpg@mandriva.org> 1:0.3.2.2-1mdv2012.0
