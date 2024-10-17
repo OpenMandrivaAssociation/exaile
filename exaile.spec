@@ -7,7 +7,7 @@ Version:	4.1.3
 Release:	1
 Group:		Sound
 License:	GPLv3
-URL:		http://www.exaile.org/
+URL:		https://www.exaile.org/
 Source0:	https://github.com/exaile/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  gir-repository
 BuildRequires:	pkgconfig(pygobject-3.0)
