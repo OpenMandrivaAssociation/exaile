@@ -1,5 +1,5 @@
 %define debug_package %{nil}
-%global __requires_exclude	%{?__requires_exclude:%__requires_exclude|}typelib\\(GtkosxApplication
+%global	__requires_exclude ^typelib\\(GtkosxApplication\\)(.*)|^typelib\\(WebKit2\\) = 4.0
 
 Summary:	A powerful GTK+ media player
 Name:		exaile
