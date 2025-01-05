@@ -3,12 +3,12 @@
 
 Summary:	A powerful GTK+ media player
 Name:		exaile
-Version:	4.1.3
+Version:	4.1.4~beta1
 Release:	1
 Group:		Sound
 License:	GPLv3
 URL:		https://www.exaile.org/
-Source0:	https://github.com/exaile/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source0:	https://github.com/exaile/%{name}/archive/v4.1.4-beta1/%{name}-4.1.4-beta1.tar.gz
 BuildRequires:  gir-repository
 BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(python)
@@ -62,7 +62,7 @@ Some of the features are:
 - submitting played tracks on the iPod to last.fm
 
 %prep
-%setup -qn %{name}-%{version}
+%setup -qn %{name}-4.1.4-beta1
 
 %build
 
