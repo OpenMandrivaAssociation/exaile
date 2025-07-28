@@ -1,0 +1,14 @@
+diff -rupN exaile-4.1.4.old/plugins/Makefile exaile-4.1.4/plugins/Makefile
+--- exaile-4.1.4.old/plugins/Makefile	2025-05-24 00:15:49.000000000 +0200
++++ exaile-4.1.4/plugins/Makefile	2025-07-27 19:59:38.393293157 +0200
+@@ -14,8 +14,8 @@ dist:
+ 	${PYTHON3_CMD} dist_plugin.py --output ../dist/plugins/ ${DIST_PLUGINS}
+ 
+ compile:
+-	${PYTHON3_CMD} -m compileall -q .
+-	-${PYTHON3_CMD} -O -m compileall -q .
++#	${PYTHON3_CMD} -m compileall -q .
++#	-${PYTHON3_CMD} -O -m compileall -q .
+ 
+ install:
+ 	install -d -m 755 ${DESTDIR}${PREFIX}${PLUGINSDIR}
