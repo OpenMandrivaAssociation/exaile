@@ -8,7 +8,7 @@ Release:	1
 License:	GPLv3+
 Group:	Sound
 Url:		https://www.exaile.org/
-Source0:	https://github.com/exaile/exaile/archive/v4.1.4/%{name}-4.1.4.tar.gz
+Source0:	https://github.com/exaile/exaile/archive/v%{version}/%{name}-%{version}.tar.gz
 # Avoid a bazilion of rpmlint errors
 Patch0:	exaile-4.1.4-disable-bytecompiling.patch
 Patch1:	exaile-4.1.4-avoid-appdatacli-validation-errors.patch
