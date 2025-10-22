@@ -3,8 +3,8 @@
 
 Summary:	A powerful GTK+ media player
 Name:	exaile
-Version:	4.1.4
-Release:	2
+Version:	4.2.0
+Release:	1
 License:	GPLv3+
 Group:	Sound
 Url:		https://www.exaile.org/
@@ -17,6 +17,7 @@ BuildRequires:	gir-repository
 BuildRequires:	gobject-introspection
 BuildRequires:	help2man
 BuildRequires:	intltool
+BuildRequires:  pkgconfig(sqlite3)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(python)
