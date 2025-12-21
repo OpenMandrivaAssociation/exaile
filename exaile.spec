@@ -12,6 +12,7 @@ Source0:	https://github.com/exaile/exaile/archive/v%{version}/%{name}-%{version}
 # Avoid a bazilion of rpmlint errors
 Patch0:	exaile-4.1.4-disable-bytecompiling.patch
 #Patch1:	exaile-4.1.4-avoid-appdatacli-validation-errors.patch
+BuildRequires:	make
 BuildRequires:	gettext
 BuildRequires:	gir-repository
 BuildRequires:	gobject-introspection
