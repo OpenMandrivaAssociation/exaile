@@ -9,6 +9,7 @@ License:	GPLv3+
 Group:	Sound
 Url:		https://www.exaile.org/
 Source0:	https://github.com/exaile/exaile/archive/v%{version}/%{name}-%{version}.tar.gz
+Source100:	%{name}.rpmlintrc
 # Avoid a bazilion of rpmlint errors
 Patch0:	exaile-4.1.4-disable-bytecompiling.patch
 #Patch1:	exaile-4.1.4-avoid-appdatacli-validation-errors.patch
@@ -18,10 +19,10 @@ BuildRequires:	gir-repository
 BuildRequires:	gobject-introspection
 BuildRequires:	help2man
 BuildRequires:	intltool
-BuildRequires:  pkgconfig(sqlite3)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(pygobject-3.0)
 BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	python3dist(sphinx)
 BuildRequires:	python3dist(sphinx-rtd-theme)
 Requires:	gstreamer1.0-plugins-good
@@ -33,10 +34,13 @@ Requires:	python-gi
 Requires:	python-gobject3
 Requires:	python-gstreamer1.0
 Requires:	python3dist(beautifulsoup4)
-Requires:	python3dist(bsddb3)
+# Deprecated for python >= 3.6
+# Needed only for migrate existing data
+ #Requires:	python3dist(bsddb3)
 Requires:	python3dist(dbus-python)
 Requires:	python3dist(feedparser)
-#Requires:	python3-musicbrainzngs
+# Not provided yet - basically abandoned upstream
+#Requires: python3-musicbrainzngs
 Requires:	python3dist(mutagen)
 Requires:	python3dist(pycairo)
 Requires:	python3dist(pylast)
